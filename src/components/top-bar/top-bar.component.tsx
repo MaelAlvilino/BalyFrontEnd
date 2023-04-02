@@ -141,7 +141,6 @@ export default function TopBar() {
                 <li>
                   <Link to="/cadastrarFuncionario">Cadastrar Funcionario</Link>
                 </li>
-
                 <li>
                   <Link onClick={AbrirDialog} to={""}>
                     Realizar Agendamento
@@ -152,6 +151,8 @@ export default function TopBar() {
                     Cadastrar Procedimento
                   </Link>
                 </li>
+                <span>Bem vindo(a),{data} </span>
+                <Buttons onClick={signOut}>Sair</Buttons>{" "}
               </>
             )}
             {data === "user_funcionario" && (
@@ -166,12 +167,16 @@ export default function TopBar() {
                     Cadastrar Procedimento
                   </Link>
                 </li>
+                <span>Bem vindo(a),{data} </span>
+                <Buttons onClick={signOut}>Sair</Buttons>{" "}
               </>
             )}
-            <>
-              <span>Bem vindo(a),{data} </span>
-              <Buttons onClick={signOut}>Sair</Buttons>{" "}
-            </>
+            {data === "user_cliente" && (
+              <>
+                <span>Bem vindo(a),{data} </span>
+                <Buttons onClick={signOut}>Sair</Buttons>{" "}
+              </>
+            )}
           </ul>
         </nav>
       </div>

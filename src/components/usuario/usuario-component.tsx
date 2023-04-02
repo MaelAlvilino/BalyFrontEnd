@@ -7,8 +7,12 @@ import TopBar from "../top-bar/top-bar.component";
 import "../usuario/usuario-component.styles.css";
 import bannerEstetica from "../../assets/estetica-banner.jpg";
 import bannerEstetica1 from "../../assets/estetica-banner1.jpg";
+import { ListarProcedimentos } from "../../services/ListarProcedimentos";
 
 type Card = {
+  procedimento: string;
+  descricao: string;
+  imagem: string;
   title: string;
   subTitle: string;
   image: string;
@@ -22,42 +26,53 @@ function Usuario() {
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
 
   useEffect(() => {
-    const response = mockBackend;
-    if (response && response.length > 0) {
-      setCardList(response);
-    }
+    chamar_procedimento();
   }, []);
+
+  async function chamar_procedimento() {
+    const response = await ListarProcedimentos();
+    if (response) {
+      setCardList(response);
+    } else {
+      console.log("Procedimentos não encontrados");
+    }
+  }
 
   function openModal(item: Card) {
     setCurrentCard(item);
     setShowModal(true);
   }
-  function emptyFunc(params: any) {
-    console.log("error");
-  }
 
-  let imgs = document.querySelectorAll(".slider img");
-  let dots = document.querySelectorAll(".dot");
-  let currentImg = 0; // index of the first image
-  const interval = 3000; // duration(speed) of the slide
+  const imgs = document.querySelectorAll(
+    ".slider img"
+  ) as NodeListOf<HTMLElement>;
+
+  const dots = document.querySelectorAll(".dot") as NodeListOf<HTMLSpanElement>;
+
+  let currentImg = 0;
+  const interval = 3000;
   let timer = setInterval(changeSlide, interval);
 
-  function changeSlide(n: number) {
+  function changeSlide(n?: number) {
     for (let i = 0; i < imgs.length; i++) {
-      (imgs[i] as HTMLElement).style.opacity = "0%";
-      dots[i].className = dots[i].className.replace(" active", "");
+      if (imgs[i].style) {
+        imgs[i].style.opacity = "0%";
+      }
+      dots[i].classList.remove("active");
     }
 
     currentImg = (currentImg + 1) % imgs.length;
 
-    if (n != undefined) {
+    if (n !== undefined) {
       clearInterval(timer);
       timer = setInterval(changeSlide, interval);
       currentImg = n;
     }
 
-    (imgs[currentImg] as HTMLElement).style.opacity = "100%";
-    dots[currentImg].className += " active";
+    if (imgs[currentImg] && dots[currentImg]) {
+      imgs[currentImg].style.opacity = "100%";
+      dots[currentImg].classList.add("active");
+    }
   }
 
   return (
@@ -70,6 +85,7 @@ function Usuario() {
         <span className="dot active" onClick={() => changeSlide(0)}></span>
         <span className="dot" onClick={() => changeSlide(1)}></span>
       </div>
+      <h1>sub title</h1>
       <div className="home-content">
         <div className="home-content-auction">
           {cardList &&
@@ -80,9 +96,9 @@ function Usuario() {
                 onClick={() => openModal(item)}
                 className="home-auction-card"
               >
-                <img src={Estetica}></img>
-                <h4>{item.subTitle}</h4>
-                <span>{item.description} </span>
+                <img src={item.imagem}></img>
+                <h4>{item.procedimento}</h4>
+                <span>{item.value} </span>
                 <span>{item.value}</span>
               </div>
             ))}
@@ -98,11 +114,11 @@ function Usuario() {
           confirmText="Agendar Procedimento"
         >
           <div className="home-auction-card">
-            <img src={Estetica}></img>
-            <h4>{currentCard?.subTitle}</h4>
+            <img src={currentCard?.imagem}></img>
+            <h4>{currentCard?.procedimento}</h4>
             <span>{currentCard.subDescription} </span>
             <span>{currentCard.value}</span>
-            <a>{currentCard.description} </a>
+            <a>{currentCard.descricao} </a>
           </div>
         </Modal>
       )}
