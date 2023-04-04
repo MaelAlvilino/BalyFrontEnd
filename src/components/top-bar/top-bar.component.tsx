@@ -92,8 +92,8 @@ export default function TopBar() {
     const response = await procurarDados(usuario);
 
     if (response) {
-      console.log(response.data);
-      // setData(response.data);
+      console.log(response);
+      setData(response.data);
     } else {
       console.log("error");
     }
@@ -105,8 +105,8 @@ export default function TopBar() {
     setShowDialog1(true);
   };
   useEffect(() => {
-    // receberDados();
-    setData("admin@admin.com");
+    receberDados();
+    //setData("user_cliente");
   }, []);
   return (
     <header className="header">
@@ -173,7 +173,7 @@ export default function TopBar() {
             )}
             {data === "user_cliente" && (
               <>
-                <span>Bem vindo(a),{data} </span>
+                <span>Bem vindo(a), {data} </span>
                 <Buttons onClick={signOut}>Sair</Buttons>{" "}
               </>
             )}

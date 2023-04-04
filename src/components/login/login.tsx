@@ -212,7 +212,7 @@ function Login() {
               {!showPassword && (
                 <LoginPassIcon
                   onClick={() => setShowPassword(!showPassword)}
-                  // src={SenhaOffIcon}
+                  src={SenhaOffIcon}
                   alt="Mostrar senha"
                   style={{ top: "29%" }}
                 />
@@ -220,7 +220,7 @@ function Login() {
               {showPassword && (
                 <LoginPassIcon
                   onClick={() => setShowPassword(!showPassword)}
-                  // src={SenhaOnIcon}
+                  src={SenhaOnIcon}
                   alt="Ocultar senha"
                 />
               )}

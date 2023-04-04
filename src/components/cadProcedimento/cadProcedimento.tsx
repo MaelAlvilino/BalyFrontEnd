@@ -2,6 +2,15 @@ import { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+
+import { Tooltip } from "@mui/material";
+import { CadastroFormButton } from "../cadastroFuncionario/cadastro.funcionario.styles";
+import React from "react";
+import {
+  CadastrarProcedimento,
+  CadastrarProcedimentoFooter,
+} from "./cadastrarProcedimento.styles";
+
 interface PropsType {
   modal: Function;
 }
@@ -45,34 +54,70 @@ const CadProcedimento: React.FC<PropsType> = ({ modal }) => {
 
   return (
     <>
-      <h1>HELLO WORLD!!</h1>
-      {/* nome do procedimentop */}
-      <label>nome</label>
-      <input onChange={(e) => setNomeProcedimento(e.target.value)} />
-      <br />
-      {/* tipo do procedimento */}
-      <label>tipo</label>
-      <input onChange={(e) => setTipoProcedimento(e.target.value)} />
-      <br />
+      <CadastrarProcedimento>
+        <div>
+          <label>Nome do Procedimento</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            onChange={(e) => setNomeProcedimento(e.target.value)}
+          />
+        </div>
 
-      {/* duração media do procedimento */}
-      <label>dura</label>
-      <input onChange={(e) => setDuracaoProcedimento(e.target.value)} />
-      <br />
+        <div>
+          <label>Tipo do Procedimento</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            onChange={(e) => setTipoProcedimento(e.target.value)}
+          />
+        </div>
 
-      {/* descricao da imagem */}
-      <label>descricao</label>
-      <input onChange={(e) => setDescricaoProcedimento(e.target.value)} />
-      <br />
+        <div>
+          <label>Duração media do Procedimento</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            onChange={(e) => setDuracaoProcedimento(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Descrição da Imagem</label>
+        </div>
+        <div>
+          <input
+            type="text"
+            onChange={(e) => setDescricaoProcedimento(e.target.value)}
+          />
+        </div>
 
-      {/* url da imagem */}
-      {/* https://live.staticflickr.com/65535/52739160496_0e6536e04c_z.jpg */}
-      <label>imagem</label>
-      <input onChange={(e) => setUrlImagem(e.target.value)} />
-      <br />
+        {/* https://live.staticflickr.com/65535/52739160496_0e6536e04c_z.jpg */}
+        <div>
+          <label>
+            URL da
+            <Tooltip title="Fazer o upload da imagem no site X">
+              <a> Imagem</a>
+            </Tooltip>
+          </label>
+        </div>
+        <div>
+          <input type="text" onChange={(e) => setUrlImagem(e.target.value)} />
+        </div>
+      </CadastrarProcedimento>
 
-      <button onClick={handleSendProc}> Enviar Proc</button>
-      <button onClick={handleCloseModal}> close modal</button>
+      <CadastrarProcedimentoFooter>
+        <CadastroFormButton onClick={handleSendProc}>
+          {" "}
+          Cadastrar
+        </CadastroFormButton>
+        <CadastroFormButton onClick={handleCloseModal}>
+          {" "}
+          Cancelar
+        </CadastroFormButton>
+      </CadastrarProcedimentoFooter>
     </>
   );
 };
