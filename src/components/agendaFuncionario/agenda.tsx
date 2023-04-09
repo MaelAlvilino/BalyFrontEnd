@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
-import { Body, Buttons, Footer } from "./agenda.styles";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+import {
+  Buttons,
+  CadastrarAgendamento,
+  CadastrarAgendamentoFooter,
+} from "./agenda.styles";
 interface PropsType {
   modal: Function;
 }
@@ -50,24 +54,21 @@ const Agendar: React.FC<PropsType> = ({ modal }) => {
   return (
     <>
       <Calendar onChange={onChange} value={value} />
-      <Body>
-        <p>Insira o seu E-mail</p>
-        <input onChange={(e) => setEmailFuncionario(e.target.value)} />
-        <p>Insira o CPF do Paciente</p>
-        <input onChange={(e) => setCpfPaciente(e.target.value)} />
-      </Body>
-      <br />
-      <Footer>
-        <Buttons
-          style={{ background: "#587947" }}
-          onClick={handleSendAgendamento}
-        >
-          Agendar
-        </Buttons>
-        <Buttons style={{ background: "#702020" }} onClick={handleCloseModal}>
-          Cancelar
-        </Buttons>
-      </Footer>
+      <CadastrarAgendamento>
+        <>
+          <label>Insira o seu E-mail</label>
+          <input
+            type="text"
+            onChange={(e) => setEmailFuncionario(e.target.value)}
+          />
+          <label>Insira o CPF do Paciente</label>
+          <input type="text" onChange={(e) => setCpfPaciente(e.target.value)} />
+        </>
+      </CadastrarAgendamento>
+      <CadastrarAgendamentoFooter>
+        <Buttons onClick={handleSendAgendamento}>Agendar</Buttons>
+        <Buttons onClick={handleCloseModal}>Cancelar</Buttons>
+      </CadastrarAgendamentoFooter>
     </>
   );
 };

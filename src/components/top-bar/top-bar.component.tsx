@@ -1,60 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Buttons } from "./styles";
-import React from "react";
-import axios from "axios";
-import Usuario from "../usuario/usuario-component";
 import Dialog from "../modal/dialog.component";
 import Agendar from "../agendaFuncionario/agenda";
 import "./styles-teste.scss";
 import CadProcedimento from "../cadProcedimento/cadProcedimento";
-
-type Card = {
-  title: string;
-  subTitle: string;
-  image: string;
-  description: string;
-  subDescription: string;
-  value: string;
-};
+import { procurarDados } from "../../services/ProcurarDados";
 
 export default function TopBar() {
-  const [showModa, setShowModa] = useState(false);
-  const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [auth, setAuth] = useState("");
-  const [cardList, setCardList] = useState<Card[]>([]);
-  const [teste, setTeste] = useState("");
-
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [size, setSize] = useState({
-    width: 0,
-    height: 0,
-  });
-  useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (size.width > 768 && menuOpen) {
-      setMenuOpen(false);
-    }
-  }, [size.width, menuOpen]);
-  /* useEffect(() => {
-    const user: any = sessionStorage.getItem("auth");
-    console.log(user);
-    if (user) {
-      setAuth(JSON.parse(user));
-    }
-  }, []); */
 
   useEffect(() => {
     const Usuario = localStorage.getItem("email");
@@ -74,28 +28,17 @@ export default function TopBar() {
 
   const [data, setData] = useState("");
 
-  const procurarDados = async (param: any) => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:5000/usuarios/${param}`
-      );
-
-      return response;
-    } catch (err: any) {
-      return err.response.data;
-    }
-  };
-
   const receberDados = async () => {
     var usuario = localStorage.getItem("email");
+    if (usuario) {
+      const response = await procurarDados(usuario);
 
-    const response = await procurarDados(usuario);
-
-    if (response) {
-      console.log(response);
-      setData(response.data);
-    } else {
-      console.log("error");
+      if (response) {
+        console.log(response);
+        setData(response.data);
+      } else {
+        console.log("error");
+      }
     }
   };
   const AbrirDialog = () => {
@@ -105,8 +48,8 @@ export default function TopBar() {
     setShowDialog1(true);
   };
   useEffect(() => {
-    receberDados();
-    //setData("user_cliente");
+    //receberDados();
+    setData("admin@admin.com");
   }, []);
   return (
     <header className="header">
@@ -130,11 +73,7 @@ export default function TopBar() {
       </Dialog>
       <div className="header__content">
         <p className="header__content__logo">Baly</p>
-        <nav
-          className={`${"header__content__nav"} 
-          ${menuOpen && size.width < 768 ? `${"isMenu"}` : ""} 
-          }`}
-        >
+        <nav className={`${"header__content__nav"}`}>
           <ul>
             {data === "admin@admin.com" && (
               <>
@@ -152,7 +91,7 @@ export default function TopBar() {
                   </Link>
                 </li>
                 <span>Bem vindo(a),{data} </span>
-                <Buttons onClick={signOut}>Sair</Buttons>{" "}
+                <button onClick={signOut}>Sair</button>{" "}
               </>
             )}
             {data === "user_funcionario" && (
@@ -168,13 +107,13 @@ export default function TopBar() {
                   </Link>
                 </li>
                 <span>Bem vindo(a),{data} </span>
-                <Buttons onClick={signOut}>Sair</Buttons>{" "}
+                <button onClick={signOut}>Sair</button>{" "}
               </>
             )}
             {data === "user_cliente" && (
               <>
                 <span>Bem vindo(a), {data} </span>
-                <Buttons onClick={signOut}>Sair</Buttons>{" "}
+                <button onClick={signOut}>Sair</button>{" "}
               </>
             )}
           </ul>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SenhaOnIcon from "../../image/senha_on.svg";
 import SenhaOffIcon from "../../image/senha_off.svg";
 

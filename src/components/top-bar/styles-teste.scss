@@ -8,7 +8,7 @@
 }
 
 .header {
-  background: #946565;
+  background: #ffffff;
   height: 100px;
   padding: 0 1.5rem;
   @include breakpoint(md) {
@@ -18,7 +18,7 @@
 
   &__content {
     overflow: hidden;
-    color: #fff;
+    color: #7a7676;
     margin: 0 auto;
     max-width: 1920px;
     height: 100%;
@@ -26,13 +26,12 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    z-index: 100;
 
     &__logo {
       font-size: 2rem;
       font-weight: bold;
       text-decoration: none;
-      color: #fff;
+      color: #7a7676;
     }
 
     &__nav {
@@ -72,6 +71,21 @@
           margin-bottom: 0;
           margin-right: calc(0.5rem + #{16px});
         }
+        button {
+          width: 7rem;
+          height: 2rem;
+          padding: 4px;
+          font-size: 18px;
+          border-radius: 10px;
+          margin-top: 15px;
+          margin-bottom: 15px;
+          cursor: pointer;
+          color: white;
+          border-style: hidden;
+          margin: 0 10px;
+          background: rgba(235, 12, 12, 0.548);
+          transform: scale(1.04);
+        }
         li {
           &:not(:last-child) {
             margin-bottom: 32px;
@@ -97,38 +111,6 @@
           }
         }
       }
-      .btn {
-        cursor: pointer;
-        outline: none;
-        padding: 0.75rem 1.25rem;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-family: inherit;
-        background: rgb(162, 162, 246);
-        color: rgb(32, 32, 32);
-        border: 1px solid transparent;
-        transition: 0.3s ease all;
-        margin: 0.5em 0.5em;
-
-        &:hover {
-          border-color: rgb(162, 162, 246);
-          background: rgba(rgb(162, 162, 246), 0.1);
-          color: rgb(162, 162, 246);
-        }
-        &:active {
-          border-color: rgb(162, 162, 246);
-          background: linear-gradient(
-            rgba(rgb(162, 162, 246), 0.2),
-            rgba(rgb(162, 162, 246), 0.3)
-          );
-          color: rgb(162, 162, 246);
-        }
-        &__login {
-          background-color: rgb(32, 32, 32);
-          color: #fff;
-        }
-      }
-
       &.isMenu {
         transform: translate(100%);
       }

@@ -5,7 +5,6 @@ import {
   CadastroFormButton,
   CadastroFormButtonContainer,
   CadastroFormContainer,
-  CadastroFormFirstButton,
   CadastroHeader,
 } from "./cadastro.styles";
 import error from "../imagens/error.jpg";
