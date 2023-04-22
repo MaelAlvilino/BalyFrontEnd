@@ -1,26 +1,28 @@
+import bannerEstetica1 from "../assets/estetica-banner1.jpg";
+
 export const mockBackend = [
   {
-    title: "TESTANDO",
+    procedimento: "LIPOD DE PAPADA",
     subTitle: "TESTANDO estetica",
-    image: "", //url da imagem
-    description: "DESCRIÇÃO - DESCRIÇÃO DESCRIÇÃO - DESCRIÇÃO",
-    subDescription: "DESCRIÇÃO - DESCRIÇÃO",
-    value: "",
+    imagem: bannerEstetica1, //url da imagem
+    descricao: "DESCRIÇÃO - DESCRIÇÃO DESCRIÇÃO - DESCRIÇÃO",
+    subDescription: "LIPO DE PAPADINHA",
+    value: "ASDHUASHDUASDHUAHA",
   },
   {
-    title: "TESTANDO",
+    procedimento: "TESTANDO",
     subTitle: "TESTANDO estetica",
     image: "", //url da imagem
-    description: "DESCRIÇÃO - DESCRIÇÃO DESCRIÇÃO - DESCRIÇÃO",
+    descricao: "DESCRIÇÃO - DESCRIÇÃO DESCRIÇÃO - DESCRIÇÃO",
     subDescription: "DESCRIÇÃO - DESCRIÇÃO",
-    value: "",
+    value: "ALGUMA COISA",
   },
   {
-    title: "TESTANDO",
+    procedimento: "TESTANDO",
     subTitle: "TESTANDO estetica",
     image: "", //url da imagem
-    description: "DESCRIÇÃO - DESCRIÇÃO DESCRIÇÃO - DESCRIÇÃO",
+    descricao: "DESCRIÇÃO - DESCRIÇÃO DESCRIÇÃO - DESCRIÇÃO",
     subDescription: "DESCRIÇÃO - DESCRIÇÃO",
-    value: "",
+    value: "ALGO?",
   },
 ];

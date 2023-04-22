@@ -51,6 +51,7 @@ function Login() {
     e.preventDefault();
     setButtonLoading(true);
     if (emailFuncionario === "admin@admin.com") {
+      localStorage.setItem("email", emailFuncionario);
       navigate("/home");
       return;
     } else {
