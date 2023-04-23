@@ -17,6 +17,7 @@ import { AlterarProcedimento } from "../../services/AlterarProcedimento";
 //   description: string;
 //   subDescription: string;
 //   value: string;
+//   id_Procedimento: string;
 // };
 interface T {
   user: string;
@@ -27,8 +28,13 @@ const Usuario: React.FC<T> = ({ user }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [currentCard, setCurrentCard] = useState<any | null>(null);
+
   // const [currentCard, setCurrentCard] = useState<Card | null>(null);
 
+  const [alterarImg, setAlterarImg] = useState("");
+  const [alterarNome, setAlterarNome] = useState("");
+  const [alterarDesc, setAlterarDesc] = useState("");
+  const [alterarValue, setAlterarValue] = useState("");
   const [subDescript, setSubDescript] = useState("");
 
   useEffect(() => {
@@ -46,9 +52,23 @@ const Usuario: React.FC<T> = ({ user }) => {
     }
   }
 
-  //todo implementar função e alterar css
-  async function alterarProcedimento(): Promise<void> {
-    const response = await AlterarProcedimento();
+  async function alterarProcedimento(e: any): Promise<void> {
+    e.preventDefault();
+
+    const ATUALIZAR_PROCEDIMENTO = {
+      id_Procedimento: String(currentCard?.id_Procedimento),
+      nome: alterarNome,
+      tipo: alterarValue,
+      Duração_mendia: "",
+      descricao: alterarDesc,
+      imagem: alterarImg,
+    };
+
+    const response = await AlterarProcedimento(ATUALIZAR_PROCEDIMENTO);
+    console.log(response);
+  }
+  function AgendarProcedimento() {
+    console.log("entrei");
   }
 
   function openModal(item: any) {
@@ -84,43 +104,39 @@ const Usuario: React.FC<T> = ({ user }) => {
           header={currentCard?.title}
           setShowModal={setShowModal}
           cancelFunction={() => {}}
-          confirmFunction={() => {}}
+          confirmFunction={
+            user === "admin@admin.com"
+              ? alterarProcedimento
+              : AgendarProcedimento
+          }
           loadingModal=""
-          confirmText="Agendar Procedimento"
+          confirmText={
+            user === "admin@admin.com"
+              ? "Atualizar Procedimento"
+              : "Agendar Procedimento"
+          }
         >
           {user === "admin@admin.com" && (
-            <>
-              <AlterarProcedimentos>
-                <div className="home-auction-card">
-                  <img src={currentCard?.imagem}></img>
-                  <label>Alterar Imagem</label>
-                  <input />
+            <AlterarProcedimentos>
+              <div className="home-auction-card">
+                <img src={currentCard?.imagem}></img>
+                <label>Alterar Imagem</label>
+                <input onChange={(e) => setAlterarImg(e.target.value)} />
 
-                  {/* <h4>{currentCard?.procedimento}</h4> */}
-                  <label> Alterar nome do Procedimento</label>
-                  <input value={currentCard?.procedimento} />
+                <label> Alterar nome do procedimento</label>
+                <input onChange={(e) => setAlterarNome(e.target.value)} />
+                <label>Alterar a descrição</label>
+                <input onChange={(e) => setAlterarDesc(e.target.value)} />
 
-                  {/* <a>{currentCard.descricao} </a> */}
-                  <label>Alterar a descrição</label>
-                  <input value={currentCard?.descricao} />
+                <label>Alterar o tipo</label>
+                <input onChange={(e) => setAlterarValue(e.target.value)} />
 
-                  {/* <span>{currentCard.value}</span> */}
-                  <label>Alterar X</label>
-                  <input value={currentCard?.value} />
-
-                  {/* <span>{currentCard.subDescription} </span> */}
-                  <label>Alterar a SubDescrição</label>
-                  <input
-                    type="text"
-                    value={currentCard?.subDescription}
-                    onChange={(e) => setSubDescript(e.target.value)}
-                  />
-                </div>
-              </AlterarProcedimentos>
-            </>
+                <label>Alterar a sub-descrição</label>
+                <input onChange={(e) => setSubDescript(e.target.value)} />
+              </div>
+            </AlterarProcedimentos>
           )}
-          :{" "}
-          {user === "user_cliente" && (
+          {user !== "admin@admin.com" && (
             <div className="home-auction-card">
               <img src={currentCard?.imagem}></img>
               <h4>{currentCard?.procedimento}</h4>

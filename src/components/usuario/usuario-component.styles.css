@@ -87,9 +87,9 @@
 .home-auction-card h4 {
   font-size: 1.5rem;
 }
-.home-auction-card:hover {
+/* .home-auction-card:hover {
   transform: scale(1.04);
-}
+} */
 
 .slider {
   width: 100%;

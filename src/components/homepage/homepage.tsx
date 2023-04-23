@@ -11,7 +11,7 @@ function Homepage() {
 
     if (usuario) {
       setUser(usuario);
-      //setUser("user_cliente");
+      // setUser("user_cliente");
     } else {
       console.log("Usuario sem autenticação");
     }

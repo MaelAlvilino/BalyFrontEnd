@@ -1,6 +1,5 @@
-import { Children, ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import "./styles.css";
-import axios from "axios";
 
 type Props = {
   header: string;
