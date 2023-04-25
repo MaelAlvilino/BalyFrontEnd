@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TopBar from "../top-bar/top-bar.component";
 import Usuario from "../usuario/usuario-component";
+import { procurarDados } from "../../services/ProcurarDados";
 
 function Homepage() {
   const [user, setUser] = useState("");
@@ -8,13 +9,14 @@ function Homepage() {
   const receberDados = async () => {
     let usuario = localStorage.getItem("email");
     console.log(usuario);
-
-    if (usuario) {
-      setUser(usuario);
-      // setUser("user_cliente");
-    } else {
-      console.log("Usuario sem autenticação");
+    if(usuario){
+      const response = await procurarDados(usuario);
+      if(response){
+        setUser(response.data) 
+      }
     }
+  console.log(user);
+
   };
   useEffect(() => {
     receberDados();

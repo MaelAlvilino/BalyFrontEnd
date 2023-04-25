@@ -6,30 +6,31 @@ import { ListarProcedimentos } from "../../services/ListarProcedimentos";
 import { mockBackend } from "../../services/mockBackend";
 import { AlterarProcedimentos } from "./AlterarProcedimentos";
 import { AlterarProcedimento } from "../../services/AlterarProcedimento";
+import Swal from "sweetalert2";
 
-// type Card = {
-//   procedimento: string;
-//   descricao: string;
-//   imagem: string;
-//   title: string;
-//   subTitle: string;
-//   image: string;
-//   description: string;
-//   subDescription: string;
-//   value: string;
-//   id_Procedimento: string;
-// };
+type Card = {
+  procedimento: string;
+  descricao: string;
+  imagem: string;
+  title: string;
+  subTitle: string;
+  image: string;
+  description: string;
+  subDescription: string;
+  value: string;
+  id_Procedimento: string;
+};
 interface T {
   user: string;
 }
 const Usuario: React.FC<T> = ({ user }) => {
-  // const [cardList, setCardList] = useState<Card[]>([]);
-  const [cardList, setCardList] = useState<any>([]);
+  const [cardList, setCardList] = useState<Card[]>([]);
+  // const [cardList, setCardList] = useState<any>([]);
 
   const [showModal, setShowModal] = useState(false);
-  const [currentCard, setCurrentCard] = useState<any | null>(null);
+  // const [currentCard, setCurrentCard] = useState<any | null>(null);
 
-  // const [currentCard, setCurrentCard] = useState<Card | null>(null);
+  const [currentCard, setCurrentCard] = useState<Card | null>(null);
 
   const [alterarImg, setAlterarImg] = useState("");
   const [alterarNome, setAlterarNome] = useState("");
@@ -43,8 +44,8 @@ const Usuario: React.FC<T> = ({ user }) => {
 
   async function chamar_procedimento(): Promise<void> {
     const response = await ListarProcedimentos();
-    const resposta = mockBackend;
-    setCardList(resposta);
+    // const resposta = mockBackend;
+    // setCardList(resposta);
     if (response) {
       setCardList(response);
     } else {
@@ -53,7 +54,6 @@ const Usuario: React.FC<T> = ({ user }) => {
   }
 
   async function alterarProcedimento(e: any): Promise<void> {
-    e.preventDefault();
 
     const ATUALIZAR_PROCEDIMENTO = {
       id_Procedimento: String(currentCard?.id_Procedimento),
@@ -65,7 +65,12 @@ const Usuario: React.FC<T> = ({ user }) => {
     };
 
     const response = await AlterarProcedimento(ATUALIZAR_PROCEDIMENTO);
-    console.log(response);
+    if(response){
+      Swal.fire({
+        icon: "success",
+        text: `Agendamento criado com sucesso.`,
+      });
+    }
   }
   function AgendarProcedimento() {
     console.log("entrei");
@@ -105,18 +110,18 @@ const Usuario: React.FC<T> = ({ user }) => {
           setShowModal={setShowModal}
           cancelFunction={() => {}}
           confirmFunction={
-            user === "admin@admin.com"
+            user === "admin@admin.com" || user === "user_funcionario"
               ? alterarProcedimento
               : AgendarProcedimento
           }
           loadingModal=""
           confirmText={
-            user === "admin@admin.com"
+            user === "admin@admin.com" || user === "user_funcionario"
               ? "Atualizar Procedimento"
               : "Agendar Procedimento"
           }
         >
-          {user === "admin@admin.com" && (
+          {user === "admin@admin.com " ||  user === "user_funcionario" && (
             <AlterarProcedimentos>
               <div className="home-auction-card">
                 <img src={currentCard?.imagem}></img>
@@ -136,7 +141,7 @@ const Usuario: React.FC<T> = ({ user }) => {
               </div>
             </AlterarProcedimentos>
           )}
-          {user !== "admin@admin.com" && (
+          {user !== "admin@admin.com"  && user !== "user_funcionario" && (
             <div className="home-auction-card">
               <img src={currentCard?.imagem}></img>
               <h4>{currentCard?.procedimento}</h4>

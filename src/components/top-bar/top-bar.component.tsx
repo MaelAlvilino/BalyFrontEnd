@@ -30,11 +30,9 @@ export default function TopBar() {
 
   const receberDados = async () => {
     var usuario = localStorage.getItem("email");
-    if (usuario) {
+    if (usuario) {      
       const response = await procurarDados(usuario);
-
       if (response) {
-        console.log(response);
         setData(response.data);
       } else {
         console.log("error");
@@ -48,8 +46,8 @@ export default function TopBar() {
     setShowDialog1(true);
   };
   useEffect(() => {
-    //receberDados();
-    setData("admin@admin.com");
+    receberDados();
+    //setData("admin@admin.com");
   }, []);
   return (
     <header className="header">
