@@ -46,8 +46,8 @@ export default function TopBar() {
     setShowDialog1(true);
   };
   useEffect(() => {
-    receberDados();
-    //setData("admin@admin.com");
+    // receberDados();
+    setData("admin@admin.com");
   }, []);
   return (
     <header className="header">

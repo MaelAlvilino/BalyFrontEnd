@@ -24,13 +24,13 @@ interface T {
   user: string;
 }
 const Usuario: React.FC<T> = ({ user }) => {
-  const [cardList, setCardList] = useState<Card[]>([]);
-  // const [cardList, setCardList] = useState<any>([]);
+  // const [cardList, setCardList] = useState<Card[]>([]);
+  const [cardList, setCardList] = useState<any>([]);
 
   const [showModal, setShowModal] = useState(false);
-  // const [currentCard, setCurrentCard] = useState<any | null>(null);
+  const [currentCard, setCurrentCard] = useState<any | null>(null);
 
-  const [currentCard, setCurrentCard] = useState<Card | null>(null);
+  // const [currentCard, setCurrentCard] = useState<Card | null>(null);
 
   const [alterarImg, setAlterarImg] = useState("");
   const [alterarNome, setAlterarNome] = useState("");
@@ -43,14 +43,14 @@ const Usuario: React.FC<T> = ({ user }) => {
   }, []);
 
   async function chamar_procedimento(): Promise<void> {
-    const response = await ListarProcedimentos();
-    // const resposta = mockBackend;
-    // setCardList(resposta);
-    if (response) {
-      setCardList(response);
-    } else {
-      console.log("Procedimentos não encontrados");
-    }
+    // const response = await ListarProcedimentos();
+    const resposta = mockBackend;
+    setCardList(resposta);
+    // if (response) {
+    //   setCardList(response);
+    // } else {
+    //   console.log("Procedimentos não encontrados");
+    // }
   }
 
   async function alterarProcedimento(e: any): Promise<void> {
@@ -85,7 +85,9 @@ const Usuario: React.FC<T> = ({ user }) => {
       <div className="slider">
         <img id="img-1" src={bannerEstetica1} alt="Image 1" />
       </div>
-      <h1>sub title to do</h1>
+      <div className="title">
+        <h1>sub title to do</h1>
+      </div>
       <div className="home-content">
         <div className="home-content-auction">
           {cardList &&
