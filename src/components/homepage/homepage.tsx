@@ -1,31 +1,14 @@
-import { useEffect, useState } from "react";
 import TopBar from "../top-bar/top-bar.component";
 import Usuario from "../usuario/usuario-component";
-import { procurarDados } from "../../services/ProcurarDados";
+import { Forms } from "../cadastarFormulario/form";
+import { AuthProvider } from "../../contexts/AuthContext";
 
 function Homepage() {
-  const [user, setUser] = useState("");
-
-  const receberDados = async () => {
-    let usuario = localStorage.getItem("email");
-    console.log(usuario);
-    if(usuario){
-      const response = await procurarDados(usuario);
-      if(response){
-        setUser(response.data) 
-      }
-    }
-  console.log(user);
-
-  };
-  useEffect(() => {
-    receberDados();
-  }, []);
   return (
-    <>
+    <AuthProvider>
       <TopBar />
-      <Usuario user={user} />
-    </>
+      <Usuario />
+    </AuthProvider>
   );
 }
 export default Homepage;

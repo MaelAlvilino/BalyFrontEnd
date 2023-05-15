@@ -76,6 +76,7 @@ function Login() {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     setButtonLoading(true);
+
     if (email === "admin@admin.com") {
       navigate("/home");
       return;

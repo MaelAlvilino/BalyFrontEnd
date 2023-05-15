@@ -30,7 +30,7 @@ export default function TopBar() {
 
   const receberDados = async () => {
     var usuario = localStorage.getItem("email");
-    if (usuario) {      
+    if (usuario) {
       const response = await procurarDados(usuario);
       if (response) {
         setData(response.data);
@@ -47,7 +47,7 @@ export default function TopBar() {
   };
   useEffect(() => {
     // receberDados();
-    setData("admin@admin.com");
+    setData("user_cliente");
   }, []);
   return (
     <header className="header">
@@ -73,6 +73,9 @@ export default function TopBar() {
         <p className="header__content__logo">Baly</p>
         <nav className={`${"header__content__nav"}`}>
           <ul>
+            <li>
+              <Link to={"/home"}>Home Page</Link>
+            </li>
             {data === "admin@admin.com" && (
               <>
                 <li>
@@ -88,7 +91,7 @@ export default function TopBar() {
                     Cadastrar Procedimento
                   </Link>
                 </li>
-                <span>Bem vindo(a),{data} </span>
+                <li>Bem vindo(a),{data} </li>
                 <button onClick={signOut}>Sair</button>{" "}
               </>
             )}
@@ -104,13 +107,13 @@ export default function TopBar() {
                     Cadastrar Procedimento
                   </Link>
                 </li>
-                <span>Bem vindo(a),{data} </span>
+                <li>Bem vindo(a),{data} </li>
                 <button onClick={signOut}>Sair</button>{" "}
               </>
             )}
             {data === "user_cliente" && (
               <>
-                <span>Bem vindo(a), {data} </span>
+                <li>Bem vindo(a), {data} </li>
                 <button onClick={signOut}>Sair</button>{" "}
               </>
             )}

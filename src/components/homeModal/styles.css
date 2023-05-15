@@ -106,8 +106,7 @@
 }
 .btn-cancel {
   background-color: white;
-  color: red;
-  border-color: red;
+  border-color: #ccc;
 }
 .btn-sucess {
   border: none;

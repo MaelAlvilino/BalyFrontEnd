@@ -14,7 +14,7 @@ type Props = {
 
 export const Modal = ({
   header,
-  cancelText = "voltar",
+  cancelText = "Voltar",
   confirmText,
   children,
   setShowModal,

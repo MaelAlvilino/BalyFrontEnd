@@ -7,24 +7,28 @@ import { mockBackend } from "../../services/mockBackend";
 import { AlterarProcedimentos } from "./AlterarProcedimentos";
 import { AlterarProcedimento } from "../../services/AlterarProcedimento";
 import Swal from "sweetalert2";
+import { useAuth } from "../../hook/useAuth";
+import { CommonOnly } from "../commonOnly";
+import { useNavigate } from "react-router-dom";
 
-type Card = {
-  procedimento: string;
-  descricao: string;
-  imagem: string;
-  title: string;
-  subTitle: string;
-  image: string;
-  description: string;
-  subDescription: string;
-  value: string;
-  id_Procedimento: string;
-};
-interface T {
-  user: string;
-}
-const Usuario: React.FC<T> = ({ user }) => {
+// type Card = {
+//   procedimento: string;
+//   descricao: string;
+//   imagem: string;
+//   title: string;
+//   subTitle: string;
+//   image: string;
+//   description: string;
+//   subDescription: string;
+//   value: string;
+//   id_Procedimento: string;
+// };
+const Usuario: React.FC = () => {
   // const [cardList, setCardList] = useState<Card[]>([]);
+  const {
+    user: { email: user },
+  } = useAuth();
+  const navigate = useNavigate();
   const [cardList, setCardList] = useState<any>([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -54,7 +58,6 @@ const Usuario: React.FC<T> = ({ user }) => {
   }
 
   async function alterarProcedimento(e: any): Promise<void> {
-
     const ATUALIZAR_PROCEDIMENTO = {
       id_Procedimento: String(currentCard?.id_Procedimento),
       nome: alterarNome,
@@ -65,7 +68,7 @@ const Usuario: React.FC<T> = ({ user }) => {
     };
 
     const response = await AlterarProcedimento(ATUALIZAR_PROCEDIMENTO);
-    if(response){
+    if (response) {
       Swal.fire({
         icon: "success",
         text: `Agendamento criado com sucesso.`,
@@ -74,12 +77,15 @@ const Usuario: React.FC<T> = ({ user }) => {
   }
   function AgendarProcedimento() {
     console.log("entrei");
+    navigate(`/id/agendar`);
   }
 
   function openModal(item: any) {
     setCurrentCard(item);
     setShowModal(true);
   }
+
+  console.log(user);
   return (
     <div className="home-container">
       <div className="slider">
@@ -123,7 +129,7 @@ const Usuario: React.FC<T> = ({ user }) => {
               : "Agendar Procedimento"
           }
         >
-          {user === "admin@admin.com " ||  user === "user_funcionario" && (
+          {user === "admin@admin.com" && (
             <AlterarProcedimentos>
               <div className="home-auction-card">
                 <img src={currentCard?.imagem}></img>
@@ -143,7 +149,7 @@ const Usuario: React.FC<T> = ({ user }) => {
               </div>
             </AlterarProcedimentos>
           )}
-          {user !== "admin@admin.com"  && user !== "user_funcionario" && (
+          <CommonOnly>
             <div className="home-auction-card">
               <img src={currentCard?.imagem}></img>
               <h4>{currentCard?.procedimento}</h4>
@@ -151,7 +157,7 @@ const Usuario: React.FC<T> = ({ user }) => {
               <span>{currentCard.value}</span>
               <a>{currentCard.descricao} </a>
             </div>
-          )}
+          </CommonOnly>
         </Modal>
       )}
     </div>

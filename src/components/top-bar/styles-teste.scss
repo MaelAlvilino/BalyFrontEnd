@@ -87,17 +87,19 @@
           transform: scale(1.04);
         }
         li {
+          @include breakpoint(md) {
+            padding: 0.75rem 1.25rem;
+          }
+
           &:not(:last-child) {
             margin-bottom: 32px;
             @include breakpoint(md) {
               margin-bottom: 0;
-              margin-right: 16px;
             }
           }
           a {
             text-decoration: none;
             color: inherit;
-            padding: 0.75rem 1.25rem;
             border-radius: 12px;
             transition: 0.3s ease all;
 
