@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../homeModal";
 import "../usuario/usuario-component.styles.css";
-import bannerEstetica1 from "../../assets/estetica-banner1.jpg";
 import { ListarProcedimentos } from "../../services/ListarProcedimentos";
 import { mockBackend } from "../../services/mockBackend";
 import { AlterarProcedimentos } from "./AlterarProcedimentos";
@@ -10,6 +9,7 @@ import Swal from "sweetalert2";
 import { useAuth } from "../../hook/useAuth";
 import { CommonOnly } from "../commonOnly";
 import { useNavigate } from "react-router-dom";
+import Banner from "../bannerComponente";
 
 // type Card = {
 //   procedimento: string;
@@ -88,9 +88,7 @@ const Usuario: React.FC = () => {
   console.log(user);
   return (
     <div className="home-container">
-      <div className="slider">
-        <img id="img-1" src={bannerEstetica1} alt="Image 1" />
-      </div>
+      <Banner/>
       <div className="title">
         <h1>sub title to do</h1>
       </div>

@@ -47,7 +47,7 @@ export default function TopBar() {
   };
   useEffect(() => {
     // receberDados();
-    setData("user_cliente");
+    setData("admin@admin.com");
   }, []);
   return (
     <header className="header">

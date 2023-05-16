@@ -11,8 +11,9 @@ import CadastroFuncionario from "../components/cadastroFuncionario/cadastro.func
 import Cadastro from "../components/cadastroUsuario/cadastro";
 import Homepage from "../components/homepage/homepage";
 import Login from "../components/login/login";
-import { Forms } from "../components/cadastarFormulario/form";
+import { Forms } from "../components/cadastarFormulario";
 import TopBar from "../components/top-bar/top-bar.component";
+import { ProcedimentosForm } from "../components/ListarProcedimento";
 
 export default function Rotinhas() {
   return (

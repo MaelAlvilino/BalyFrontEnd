@@ -1,0 +1,28 @@
+.posts{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+.container{
+    min-height: 100vh;
+    background: #eee ;
+}
+.post{
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+}
+
+.button {
+    width: 7rem;
+    height: 2rem;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: rgb(255, 254, 254);
+    border-style: hidden;
+    margin: 0 10px;
+    background: #6dfc6d;
+    transform: scale(1.04);
+  }
+
