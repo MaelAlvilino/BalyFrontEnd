@@ -7,7 +7,7 @@ import { AlterarProcedimentos } from "./AlterarProcedimentos";
 import { AlterarProcedimento } from "../../services/AlterarProcedimento";
 import Swal from "sweetalert2";
 import { useAuth } from "../../hook/useAuth";
-import { CommonOnly } from "../commonOnly";
+import { CommonOnly } from "../commonOnly/user_common";
 import { useNavigate } from "react-router-dom";
 import Banner from "../bannerComponente";
 
@@ -76,8 +76,7 @@ const Usuario: React.FC = () => {
     }
   }
   function AgendarProcedimento() {
-    console.log("entrei");
-    navigate(`/id/agendar`);
+    navigate(`/forms`);
   }
 
   function openModal(item: any) {
@@ -88,7 +87,7 @@ const Usuario: React.FC = () => {
   console.log(user);
   return (
     <div className="home-container">
-      <Banner/>
+      <Banner />
       <div className="title">
         <h1>sub title to do</h1>
       </div>
@@ -114,7 +113,7 @@ const Usuario: React.FC = () => {
         <Modal
           header={currentCard?.title}
           setShowModal={setShowModal}
-          cancelFunction={() => {}}
+          cancelFunction={() => { }}
           confirmFunction={
             user === "admin@admin.com" || user === "user_funcionario"
               ? alterarProcedimento

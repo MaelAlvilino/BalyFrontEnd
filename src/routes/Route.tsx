@@ -25,8 +25,8 @@ export default function Rotinhas() {
         <Route path="/home" element={<Homepage />} />
         <Route path="/cadastrarFuncionario" element={<CadastroFuncionario />} />
         <Route path="/agenda" element={<Agendar />} />
-        <Route path="/:id" element={<Forms />}>
-          <Route path="/:id/agendar" element={<TopBar />} />
+        <Route path="/forms" element={<Forms />}>
+          <Route path="/forms" element={<TopBar />} />
         </Route>
       </Routes>
     </BrowserRouter>

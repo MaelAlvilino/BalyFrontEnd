@@ -130,9 +130,6 @@
         color: rgb(162, 162, 246);
       }
 
-      @include breakpoint(md) {
-        display: none;
-      }
     }
   }
 }

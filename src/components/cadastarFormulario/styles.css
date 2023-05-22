@@ -5,12 +5,18 @@
 }
 .container{
     min-height: 100vh;
-    background: #eee ;
+    background: #f8f8f8 ;
 }
 .post{
     background: #ffffff;
     box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.post-content {
+    text-align: center;
+  }
 
 .button {
     width: 7rem;
@@ -22,7 +28,7 @@
     color: rgb(255, 254, 254);
     border-style: hidden;
     margin: 0 10px;
-    background: #6dfc6d;
+    background: #1c7a10;
     transform: scale(1.04);
   }
 

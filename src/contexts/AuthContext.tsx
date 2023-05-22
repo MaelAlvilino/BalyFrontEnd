@@ -35,7 +35,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     // receberDados();
     setUser({
-      email: "admin@admin.com",
+      email: "user_cliente",
     });
   }, []);
 
