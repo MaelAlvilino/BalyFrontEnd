@@ -84,7 +84,6 @@ const Usuario: React.FC = () => {
     setCurrentCard(item);
     setShowModal(true);
   }
-  console.log(user);
 
   return (
     <div className="home-container">

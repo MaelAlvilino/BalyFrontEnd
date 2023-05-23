@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import Banner from "../bannerComponente";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,6 +9,7 @@ import { CadastroFormContainer } from "../cadastroFuncionario/cadastro.funcionar
 import { MOCK_BACKEND_FORMULARIO } from "../../services/mockBackend";
 import { AdminEmployee } from "../commonOnly/admin_employee_common";
 import { CommonOnly } from "../commonOnly/user_common";
+import Swal from "sweetalert2";
 // import * as S from "./styles";
 type T = {
   id_Formulario: string;
@@ -24,6 +25,8 @@ export function Forms() {
     user: { email: user },
   } = useAuth();
 
+  const navigate = useNavigate();
+
   const [procedimentos, setProced] = useState<any>([]);
 
   const [nome, setNome] = useState('')
@@ -35,7 +38,6 @@ export function Forms() {
   const [datahora, setDataHora] = useState('')
 
   function handleData() {
-
     const data = {
       nome,
       sobrenome,
@@ -48,13 +50,29 @@ export function Forms() {
     axios
       .post(`http://127.0.0.1:5000/cadastrarFormulario/${email}`, data)
       .then(() => {
+        Swal.fire({
+          title: 'Formulario enviado com Sucesso!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK!'
+        }).then((result) => {
+          navigate("/home");
+        })
       })
       .catch(() => {
-        console.log("deu erro");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Erro ao enviar o Formulario.',
+        })
       });
   }
 
   async function handleGetData() {
+    let usuario = localStorage.getItem("email");
+    if (usuario) {
+      setEmail(usuario)
+    }
     const mock = MOCK_BACKEND_FORMULARIO
     const response = await ListarFormularios()
     if (response) {
@@ -66,7 +84,6 @@ export function Forms() {
   }
   useEffect(() => {
     handleGetData()
-    setEmail('pedro@gmail.com')
   }, [])
 
   return (
@@ -111,8 +128,8 @@ export function Forms() {
         <section className="container">
           <div className="posts">
             {procedimentos.map((proced: T) => (
-              <div className="post">
-                <div key={proced.id_Formulario} className="post-content">
+              <div key={proced.id_Formulario} className="post">
+                <div className="post-content">
                   <h1>{proced.nome}</h1>
                   <h2>{proced.alergia}</h2>
                   <p>{proced.telefone}</p>
