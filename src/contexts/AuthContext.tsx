@@ -22,22 +22,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const receberDados = async () => {
     let usuario = localStorage.getItem("email");
-    console.log(usuario);
+
     if (usuario) {
       const response = await procurarDados(usuario);
       if (response) {
-        setUser(response.data);
+        setUser({
+          email: response.data,
+        });
       }
     }
-    console.log(user);
   };
 
   useEffect(() => {
-    // receberDados();
-    setUser({
-      email: "user_cliente",
-    });
+    receberDados();
+    // setUser({
+    //   email: "user_cliente",
+    // });
   }, []);
+
 
   return (
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>

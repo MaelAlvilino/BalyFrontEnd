@@ -37,20 +37,17 @@ export function Forms() {
   function handleData() {
 
     const data = {
-      id_cliente: "1",
       nome,
       sobrenome,
       telefone,
-      email,
       alergia,
       comentario,
       data_hora: datahora,
     }
 
     axios
-      .post("http://127.0.0.1:5000/cadastroFormulario", data)
+      .post(`http://127.0.0.1:5000/cadastrarFormulario/${email}`, data)
       .then(() => {
-        console.log('ok')
       })
       .catch(() => {
         console.log("deu erro");
@@ -69,6 +66,7 @@ export function Forms() {
   }
   useEffect(() => {
     handleGetData()
+    setEmail('pedro@gmail.com')
   }, [])
 
   return (
@@ -97,8 +95,6 @@ export function Forms() {
             <input type="text" onChange={(e) => setSobrenome(e.target.value)} />
             <label>telefone</label>
             <input type="text" onChange={(e) => setTelefone(e.target.value)} />
-            <label>email</label>
-            <input type="text" onChange={(e) => setEmail(e.target.value)} />
             <label>alergia</label>
             <input type="text" onChange={(e) => setAlergia(e.target.value)} />
             <label>comentario</label>
@@ -118,8 +114,7 @@ export function Forms() {
               <div className="post">
                 <div key={proced.id_Formulario} className="post-content">
                   <h1>{proced.nome}</h1>
-                  <h2>{proced.email}</h2>
-                  <h3>{proced.alergia}</h3>
+                  <h2>{proced.alergia}</h2>
                   <p>{proced.telefone}</p>
                   <p>{proced.data_hora}</p>
                   <p>{proced.comentario}</p>

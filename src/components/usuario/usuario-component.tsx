@@ -10,31 +10,32 @@ import { useAuth } from "../../hook/useAuth";
 import { CommonOnly } from "../commonOnly/user_common";
 import { useNavigate } from "react-router-dom";
 import Banner from "../bannerComponente";
+import axios from "axios";
 
-// type Card = {
-//   procedimento: string;
-//   descricao: string;
-//   imagem: string;
-//   title: string;
-//   subTitle: string;
-//   image: string;
-//   description: string;
-//   subDescription: string;
-//   value: string;
-//   id_Procedimento: string;
-// };
+type Card = {
+  procedimento: string;
+  descricao: string;
+  imagem: string;
+  title: string;
+  subTitle: string;
+  image: string;
+  description: string;
+  subDescription: string;
+  value: string;
+  id_Procedimento: string;
+};
 const Usuario: React.FC = () => {
-  // const [cardList, setCardList] = useState<Card[]>([]);
   const {
     user: { email: user },
   } = useAuth();
+
   const navigate = useNavigate();
-  const [cardList, setCardList] = useState<any>([]);
 
   const [showModal, setShowModal] = useState(false);
-  const [currentCard, setCurrentCard] = useState<any | null>(null);
-
-  // const [currentCard, setCurrentCard] = useState<Card | null>(null);
+  // const [currentCard, setCurrentCard] = useState<any | null>(null);
+  const [currentCard, setCurrentCard] = useState<Card | null>(null);
+  // const [cardList, setCardList] = useState<any>([]);
+  const [cardList, setCardList] = useState<Card[]>([]);
 
   const [alterarImg, setAlterarImg] = useState("");
   const [alterarNome, setAlterarNome] = useState("");
@@ -47,14 +48,14 @@ const Usuario: React.FC = () => {
   }, []);
 
   async function chamar_procedimento(): Promise<void> {
-    // const response = await ListarProcedimentos();
-    const resposta = mockBackend;
-    setCardList(resposta);
-    // if (response) {
-    //   setCardList(response);
-    // } else {
-    //   console.log("Procedimentos não encontrados");
-    // }
+    const response = await ListarProcedimentos();
+    // const resposta = mockBackend;
+    // setCardList(resposta);
+    if (response) {
+      setCardList(response);
+    } else {
+      console.log("Procedimentos não encontrados");
+    }
   }
 
   async function alterarProcedimento(e: any): Promise<void> {
@@ -83,8 +84,8 @@ const Usuario: React.FC = () => {
     setCurrentCard(item);
     setShowModal(true);
   }
-
   console.log(user);
+
   return (
     <div className="home-container">
       <Banner />
@@ -126,7 +127,7 @@ const Usuario: React.FC = () => {
               : "Agendar Procedimento"
           }
         >
-          {user === "admin@admin.com" && (
+          {user === "admin@admin.com" || user === "user_funcionario" && (
             <AlterarProcedimentos>
               <div className="home-auction-card">
                 <img src={currentCard?.imagem}></img>

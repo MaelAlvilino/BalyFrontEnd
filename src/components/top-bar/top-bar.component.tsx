@@ -47,8 +47,8 @@ export default function TopBar() {
     setShowDialog1(true);
   };
   useEffect(() => {
-    // receberDados();
-    setData("user_cliente");
+    receberDados();
+    //setData("user_cliente");
   }, []);
   return (
     <>

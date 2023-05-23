@@ -18,7 +18,6 @@ const Agendar: React.FC<PropsType> = ({ modal }) => {
 
   const handleSendAgendamento = (e: any) => {
     let Data = ConverterData(value);
-    console.log(Data);
     const agendamento = {
       email: emailFuncionario,
       cpf: cpf,
@@ -29,7 +28,6 @@ const Agendar: React.FC<PropsType> = ({ modal }) => {
     axios
       .post("http://localhost:5000/cadastrarAgendamento", agendamento)
       .then(() => {
-        console.log("deu certo");
         modal(false);
         Swal.fire({
           icon: "success",
@@ -40,7 +38,6 @@ const Agendar: React.FC<PropsType> = ({ modal }) => {
         console.log("deu erro");
       });
 
-    console.log(agendamento);
   };
   const handleCloseModal = () => {
     modal(false);
