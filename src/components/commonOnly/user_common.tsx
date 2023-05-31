@@ -10,7 +10,7 @@ export function CommonOnly({ children }: CommonOnlyProps) {
     user: { email: user },
   } = useAuth();
 
-  if (user === "user_cliente") {
+  if (user === "user_cliente" || user === "") {
     return <>{children}</>;
   }
 

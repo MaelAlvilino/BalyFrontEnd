@@ -11,6 +11,7 @@ import { CommonOnly } from "../commonOnly/user_common";
 import { useNavigate } from "react-router-dom";
 import Banner from "../bannerComponente";
 import axios from "axios";
+import { isAuthenticated } from "../../routes/auth";
 
 type Card = {
   procedimento: string;
@@ -77,7 +78,15 @@ const Usuario: React.FC = () => {
     }
   }
   function AgendarProcedimento() {
-    navigate(`/forms`);
+    if (!isAuthenticated()) {
+      Swal.fire({
+        icon: "error",
+        text: `Faça login para agendar.`,
+      });
+    } else {
+
+      navigate(`/forms`);
+    }
   }
 
   function openModal(item: any) {
