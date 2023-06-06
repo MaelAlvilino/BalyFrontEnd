@@ -10,7 +10,6 @@ import { useAuth } from "../../hook/useAuth";
 import { CommonOnly } from "../commonOnly/user_common";
 import { useNavigate } from "react-router-dom";
 import Banner from "../bannerComponente";
-import axios from "axios";
 import { isAuthenticated } from "../../routes/auth";
 
 type Card = {
@@ -84,8 +83,7 @@ const Usuario: React.FC = () => {
         text: `Faça login para agendar.`,
       });
     } else {
-
-      navigate(`/forms`);
+      navigate("/forms");
     }
   }
 
@@ -98,7 +96,8 @@ const Usuario: React.FC = () => {
     <div className="home-container">
       <Banner />
       <div className="title">
-        <h1>sub title to do</h1>
+        <span>Conheça</span>
+        <span className="title_main">Nossos Serviços</span>
       </div>
       <div className="home-content">
         <div className="home-content-auction">

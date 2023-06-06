@@ -27,7 +27,7 @@ const CadProcedimento: React.FC<PropsType> = ({ modal }) => {
 
   const handleSendProc = (e: any) => {
     const procedimento = {
-      nome: nomeProcedimento,
+      nome_proc: nomeProcedimento,
       tipo: tipoProcedimento,
       duração_media: duracaoProcedimento,
       descricao: descricaoProcedimento,
@@ -49,7 +49,6 @@ const CadProcedimento: React.FC<PropsType> = ({ modal }) => {
         console.log("deu erro");
       });
 
-    console.log(procedimento);
   };
 
   return (

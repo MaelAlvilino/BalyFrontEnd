@@ -14,6 +14,7 @@ interface PropsType {
   setShowDialog: Function;
   id: string;
   size?: string;
+
 }
 
 const Dialog: React.FC<PropsType> = ({

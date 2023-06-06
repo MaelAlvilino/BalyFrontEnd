@@ -103,3 +103,21 @@
   transform: translateX(-50%);
   max-width: 1240px;
 }
+
+.title_main {
+  font-weight: 500;
+  font-size: 50px;
+  color: rgba(235, 12, 12, 0.548);
+  letter-spacing: -2px;
+}
+.title span {
+  width: 100%;
+  float: left;
+  line-height: 1;
+}
+.title {
+  font-family: pluto, sans-serif;
+  font-style: italic;
+  padding-right: 40px;
+  padding-left: 10px;
+}

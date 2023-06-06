@@ -13,6 +13,8 @@ import Login from "../components/login/login";
 import { Forms } from "../components/cadastarFormulario";
 import TopBar from "../components/top-bar/top-bar.component";
 import { isAuthenticated } from "./auth";
+import Consulta from "../components/realizarConsulta";
+import HistoricoConsulta from "../components/historicoConsulta";
 // import { ProcedimentosForm } from "../components/ListarProcedimento";
 
 export default function Rotas() {
@@ -39,6 +41,12 @@ export default function Rotas() {
             <Route path="/agenda" element={<Agendar />} />
             <Route path="/forms" element={<Forms />}>
               <Route path="/forms" element={<TopBar />} />
+            </Route>
+            <Route path="/consulta" element={<Consulta />}>
+              <Route path="/consulta" element={<TopBar />} />
+            </Route>
+            <Route path="/historicoConsulta" element={<HistoricoConsulta />}>
+              <Route path="/historicoConsulta" element={<TopBar />} />
             </Route>
           </>
         )}

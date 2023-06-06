@@ -10,19 +10,27 @@ import {
 } from "./agenda.styles";
 interface PropsType {
   modal: Function;
+  nome_proc: string;
+  comentario_form: string;
+  cpfParam: string;
+  dataHor: string;
 }
-const Agendar: React.FC<PropsType> = ({ modal }) => {
-  const [value, onChange] = useState(new Date());
+const Agendar: React.FC<PropsType> = ({ modal, nome_proc, comentario_form, cpfParam, dataHor }) => {
+  const [value, setHora] = useState(new Date());
   const [emailFuncionario, setEmailFuncionario] = useState("");
-  const [cpf, setCpfPaciente] = useState("");
 
   const handleSendAgendamento = (e: any) => {
-    let Data = ConverterData(value);
+    let hor = new Date();
+
     const agendamento = {
       email: emailFuncionario,
-      cpf: cpf,
-      data_hora: Data,
+      cpf: cpfParam,
+      data_hora: dataHor,
+      nome_proc,
+      comentario_form
     };
+    console.log(agendamento);
+
 
     e.preventDefault();
     axios
@@ -50,7 +58,7 @@ const Agendar: React.FC<PropsType> = ({ modal }) => {
 
   return (
     <>
-      <Calendar onChange={onChange} value={value} />
+      {/* <Calendar onChange={setHora} value={value} /> */}
       <CadastrarAgendamento>
         <>
           <label>Insira o seu E-mail</label>
@@ -58,8 +66,8 @@ const Agendar: React.FC<PropsType> = ({ modal }) => {
             type="text"
             onChange={(e) => setEmailFuncionario(e.target.value)}
           />
-          <label>Insira o CPF do Paciente</label>
-          <input type="text" onChange={(e) => setCpfPaciente(e.target.value)} />
+          <label>CPF do Paciente</label>
+          <input type="text" defaultValue={cpfParam} />
         </>
       </CadastrarAgendamento>
       <CadastrarAgendamentoFooter>
